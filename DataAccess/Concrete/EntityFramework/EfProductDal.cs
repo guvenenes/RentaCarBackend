@@ -1,5 +1,8 @@
-﻿using DataAccess.Abstract;
+﻿using Core.DataAccess.EntityFramework;
+using Core.Utilities.Results;
+using DataAccess.Abstract;
 using Entities.Concrete;
+using Entities.DTOs;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -9,54 +12,20 @@ using System.Text;
 
 namespace DataAccess.Concrete.EntityFramework
 {
-    public class EfProductDal : IProductDal
+    public class EfProductDal : EfEntityRepositoryBase<Product, RentACarContext>, IProductDal
     {
-        public void Add(Product entity)
+        public List<ProductDetailDto> GetCarDetail()
         {
             using (RentACarContext context = new RentACarContext())
             {
-                if (entity.DailyPrice >= 0 && entity.Description.Length >= 2)
-                {
-                    var AddedEntity = context.Entry(entity);
-                    AddedEntity.State = EntityState.Added;
-                    context.SaveChanges();
-                }
-                else
-                {
-                    Console.WriteLine("HATA!! Günlük ücrette veya açıklamada sıkıntı olabilir!");
-                }
+                var result = from p in context.Cars
+                             join b in context.Brands
+                             on p.BrandId equals b.BrandId
+                             join c in context.Colors
+                             on p.ColorId equals c.ColorId
+                             select new ProductDetailDto { ProductId = p.Id, BrandId = b.BrandId, BrandName = b.BrandName, ColorName = c.ColorName, DailyPrice = p.DailyPrice };
+                return result.ToList();
             }
-        }
-
-        public void Delete(Product entity)
-        {
-            using (RentACarContext context = new RentACarContext())
-            {
-                var DeletedEntity = context.Entry(entity);
-                DeletedEntity.State = EntityState.Deleted;
-                context.SaveChanges();
-            }
-        }
-
-        public List<Product> GetAll(Expression<Func<Product, bool>> filter = null)
-        {
-            using (RentACarContext context = new RentACarContext())
-            {
-                return filter == null ? context.Set<Product>().ToList() : context.Set<Product>().Where(filter).ToList();
-            }
-        }
-
-        public Product GetById(Expression<Func<Product, bool>> filter)
-        {
-            using (RentACarContext context = new RentACarContext())
-            {
-                return context.Set<Product>().SingleOrDefault(filter);
-            }
-        }
-
-        public void Update(Product entity)
-        {
-            throw new NotImplementedException();
-        }
+        }   
     }
 }

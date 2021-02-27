@@ -9,10 +9,11 @@ namespace ConsoleUI
     {
         static void Main(string[] args)
         {
-            //ProductManager productManager = new ProductManager(new EfProductDal());
             //BrandManager brandManager = new BrandManager(new EfBrandDal());
             //brandManager.GetAll();
             //productManager.GetAll();
+            ProductManager productManager = new ProductManager(new EfProductDal());
+            productManager.GetCarDetail();
         }
     }
 }
