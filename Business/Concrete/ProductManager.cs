@@ -11,7 +11,7 @@ using System.Text;
 
 namespace Business.Concrete
 {
-    public class ProductManager : IProductService
+    public class ProductManager:IProductService
     {
         IProductDal _productDal;
 
@@ -25,7 +25,7 @@ namespace Business.Concrete
             using (RentACarContext context = new RentACarContext())
             {
                 _productDal.Add(product);
-                return new SuccessResult (Messages.CarAdded);
+                return new SuccessResult(Messages.CarAdded);
             }
         }
 
@@ -60,6 +60,5 @@ namespace Business.Concrete
             _productDal.Update(product);
             return new SuccessResult(Messages.CarAdded);
         }
-
     }
 }

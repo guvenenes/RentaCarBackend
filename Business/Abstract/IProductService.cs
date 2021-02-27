@@ -7,7 +7,7 @@ using System.Text;
 
 namespace Business.Abstract
 {
-    public interface IProductService
+    interface IProductService
     {
         IDataResult<List<Product>> GetAll();
         IDataResult<List<Product>> GetCarsByBrandId(int Id);
@@ -17,6 +17,5 @@ namespace Business.Abstract
         IResult Add(Product product);
         IResult Delete(Product product);
         IResult Update(Product product);
-
     }
 }
