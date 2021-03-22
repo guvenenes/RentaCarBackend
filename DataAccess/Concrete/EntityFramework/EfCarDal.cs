@@ -12,9 +12,9 @@ using System.Text;
 
 namespace DataAccess.Concrete.EntityFramework
 {
-    public class EfProductDal : EfEntityRepositoryBase<Product, RentACarContext>, IProductDal
+    public class EfCarDal : EfEntityRepositoryBase<Car, RentACarContext>, ICarDal
     {
-        public List<ProductDetailDto> GetCarDetail()
+        public List<CarDetailDto> GetCarDetail()
         {
             using (RentACarContext context = new RentACarContext())
             {
@@ -23,7 +23,7 @@ namespace DataAccess.Concrete.EntityFramework
                              on p.BrandId equals b.BrandId
                              join c in context.Colors
                              on p.ColorId equals c.ColorId
-                             select new ProductDetailDto { ProductId = p.Id, BrandId = b.BrandId, BrandName = b.BrandName, ColorName = c.ColorName, DailyPrice = p.DailyPrice };
+                             select new CarDetailDto { CarId = p.CarId, BrandId = b.BrandId, BrandName = b.BrandName, ColorName = c.ColorName, DailyPrice = p.DailyPrice };
                 return result.ToList();
             }
         }   
