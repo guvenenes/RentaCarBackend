@@ -68,9 +68,9 @@ namespace Business.Concrete
             return new SuccessDataResult<List<Car>>(_carDal.GetAll(p => p.ColorId == Id));
         }
         [CacheRemoveAspect("ICarService.Get")]
-        public IResult Update(Car product)
+        public IResult Update(Car car)
         {
-            _carDal.Update(product);
+            _carDal.Update(car);
             return new SuccessResult(Messages.CarAdded);
         }
     }

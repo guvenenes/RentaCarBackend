@@ -1,4 +1,5 @@
 ﻿using Core.Entities.Concrete;
+using Entities.Concrete;
 using System;
 using System.Collections.Generic;
 using System.Runtime.Serialization;
@@ -24,5 +25,17 @@ namespace Business.Constans
         public static string SuccessfulLogin = "başarılı giriş";
         public static string UserAlreadyExists = "kullanıcı zaten var";
         public static string AccessTokenCreated = "erişim oluşturuldu";
+        internal static string BrandAdded;
+        internal static string BrandDeleted;
+        internal static List<Brand> CategoryListed;
+        internal static string BrandUpdated;
+        internal static string ColorAdded;
+        internal static string ColorDeleted;
+        internal static string ColorsListed;
+        internal static string ColorUpdated;
+        internal static string CustomerDeleted;
+        internal static string CustomerUpdated;
+        internal static string RentalDeleted;
+        internal static string RentalUpdated;
     }
 }

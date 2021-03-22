@@ -1,5 +1,6 @@
 ﻿using Business.Abstract;
 using Business.Constans;
+using Core.Aspects.Autofac.Caching;
 using Core.Utilities.Results;
 using DataAccess.Abstract;
 using DataAccess.Concrete.EntityFramework;
@@ -18,20 +19,28 @@ namespace Business.Concrete
         {
             _rentalDal = rentalDal;
         }
-
-        public IResult AddRent(Rental rental)
+        [CacheRemoveAspect("IRentalService.Get")]
+        public IResult Add(Rental rental)
         {
-            using (RentACarContext context = new RentACarContext())
-            {
-                if (!(rental.ReturnDate == null || rental.ReturnDate < DateTime.Now))
-                {
-                    return new ErrorResult(Messages.RentalError);
-
-                }
-
-            }
             _rentalDal.Add(rental);
             return new SuccessResult(Messages.RentalAdded);
+        }
+
+        public IResult Delete(Rental rental)
+        {
+            _rentalDal.Delete(rental);
+            return new SuccessResult(Messages.RentalDeleted);
+        }
+
+        public IDataResult<List<Rental>> GetAll()
+        {
+            return new SuccessDataResult<List<Rental>>(_rentalDal.GetAll());
+        }
+        [CacheRemoveAspect("IRentalService.Get")]
+        public IResult Update(Rental rental)
+        {
+            _rentalDal.Update(rental);
+            return new SuccessResult(Messages.RentalUpdated);
         }
     }
 }

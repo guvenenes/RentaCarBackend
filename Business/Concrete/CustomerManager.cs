@@ -4,6 +4,7 @@ using Core.Utilities.Results;
 using DataAccess.Abstract;
 using DataAccess.Concrete.EntityFramework;
 using Entities.Concrete;
+using Entities.DTOs;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -19,14 +20,31 @@ namespace Business.Concrete
             _customerDal = customerDal;
         }
 
-        public IResult AddUser(Customer customer)
+        public IResult Add(Customer customer)
         {
-            using (RentACarContext context = new RentACarContext())
-            {
-                _customerDal.Add(customer);
-                return new SuccessResult(Messages.CustomerAdded);
+            _customerDal.Add(customer);
+            return new SuccessResult(Messages.CustomerAdded);
+        }
 
-            }
+        public IResult Delete(Customer customer)
+        {
+            _customerDal.Delete(customer);
+            return new SuccessResult(Messages.CustomerDeleted);
+        }
+
+        public IDataResult<List<Customer>> GetAll()
+        {
+            return new SuccessDataResult<List<Customer>>(_customerDal.GetAll());
+        }
+
+        public IDataResult<List<CustomerDetailDto>> GetCustomerDetails()
+        {
+            return new SuccessDataResult<List<CustomerDetailDto>>(_customerDal.GetCustomerDetail());
+        }
+
+        public IResult Update(Customer customer)
+        {
+            return new SuccessResult(Messages.CustomerUpdated);
         }
     }
 }
