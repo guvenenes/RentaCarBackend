@@ -25,17 +25,17 @@ namespace Business.Constans
         public static string SuccessfulLogin = "başarılı giriş";
         public static string UserAlreadyExists = "kullanıcı zaten var";
         public static string AccessTokenCreated = "erişim oluşturuldu";
-        internal static string BrandAdded;
-        internal static string BrandDeleted;
-        internal static List<Brand> CategoryListed;
-        internal static string BrandUpdated;
-        internal static string ColorAdded;
-        internal static string ColorDeleted;
-        internal static string ColorsListed;
-        internal static string ColorUpdated;
-        internal static string CustomerDeleted;
-        internal static string CustomerUpdated;
-        internal static string RentalDeleted;
-        internal static string RentalUpdated;
+        public static string BrandAdded = "Marka eklendi";
+        public static string BrandDeleted = "Marka silindi";
+        public static string CategoryListed = "Kategoriler listelendi";
+        public static string BrandUpdated = "Marka güncellendi";
+        public static string ColorAdded = "Renk eklendi";
+        public static string ColorDeleted = "Renk silindi";
+        public static string ColorsListed = "Renkler Listelendi";
+        public static string ColorUpdated = "Renk güncellendi";
+        public static string CustomerDeleted = "Müşteri silindi";
+        public static string CustomerUpdated = "Müşteri güncellendi";
+        public static string RentalDeleted = "Kiralama silindi";
+        public static string RentalUpdated = "Kiralama güncellendi";
     }
 }
