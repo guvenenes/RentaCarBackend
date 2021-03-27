@@ -36,6 +36,12 @@ namespace Business.Concrete
         {
             return new SuccessDataResult<List<Rental>>(_rentalDal.GetAll());
         }
+
+        public IDataResult<List<Rental>> GetByCustomerId(int customerId)
+        {
+            return new SuccessDataResult<List<Rental>>(_rentalDal.GetAll(p => p.CustomerId == customerId));
+        }
+
         [CacheRemoveAspect("IRentalService.Get")]
         public IResult Update(Rental rental)
         {
