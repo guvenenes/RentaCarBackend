@@ -1,5 +1,6 @@
 ﻿using Business.Abstract;
 using Entities.Concrete;
+using Entities.DTOs;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
@@ -13,9 +14,11 @@ namespace WebAPI.Controllers
     public class RentalsController : ControllerBase
     {
         IRentalService _rentalService;
+        IPaymentService _paymentService;
 
-        public RentalsController(IRentalService rentalService)
+        public RentalsController(IRentalService rentalService,IPaymentService paymentService)
         {
+            _paymentService = paymentService;
             _rentalService = rentalService;
         }
 
@@ -31,14 +34,23 @@ namespace WebAPI.Controllers
         }
 
         [HttpPost("add")]
-        public IActionResult Add(Rental rental)
+        public IActionResult Add(RentalPaymentDto rental)
         {
-            var result = _rentalService.Add(rental);
-            if (result.Success)
+            var paymentResult = _paymentService.Pay(rental.CreditCard);
+            if (!paymentResult.Success)
             {
-                return Ok(result);
+                return BadRequest(paymentResult);
             }
-            return BadRequest(result);
+            var rentalResult = _rentalService.Add(rental.Rental);
+            if (rentalResult.Success)
+            {
+                return Ok(rentalResult);
+            }
+            else
+            {
+                return BadRequest(rentalResult);
+            }
+            
         }
         [HttpPost("delete")]
         public IActionResult Delete(Rental rental)

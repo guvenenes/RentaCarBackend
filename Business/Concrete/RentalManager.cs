@@ -1,12 +1,14 @@
 ﻿using Business.Abstract;
 using Business.Constans;
 using Core.Aspects.Autofac.Caching;
+using Core.Utilities.Business;
 using Core.Utilities.Results;
 using DataAccess.Abstract;
 using DataAccess.Concrete.EntityFramework;
 using Entities.Concrete;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 
 namespace Business.Concrete
@@ -22,8 +24,15 @@ namespace Business.Concrete
         [CacheRemoveAspect("IRentalService.Get")]
         public IResult Add(Rental rental)
         {
-            _rentalDal.Add(rental);
-            return new SuccessResult(Messages.RentalAdded);
+            IResult result = BusinessRules.Run(CheckIfCarReturned(rental.RentDate,rental.CarId));
+            if (result == null)
+            {
+                _rentalDal.Add(rental);
+                return new SuccessResult(Messages.RentalAdded);
+            }
+            
+            return new ErrorResult(Messages.CarNotReturned);
+            
         }
 
         public IResult Delete(Rental rental)
@@ -47,6 +56,22 @@ namespace Business.Concrete
         {
             _rentalDal.Update(rental);
             return new SuccessResult(Messages.RentalUpdated);
+        }
+        private IResult CheckIfCarReturned(DateTime rentDate,int carId)
+        {
+            var result1 = _rentalDal.GetAll(r => r.ReturnDate >= rentDate && r.CarId == carId).Any();
+            if (!result1)
+            {
+                return new SuccessResult(Messages.RentalAdded);
+            }
+            else 
+            { 
+                return new ErrorResult(Messages.CarNotReturned);
+            }
+
+            
+            
+            
         }
     }
 }

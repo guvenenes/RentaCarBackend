@@ -15,8 +15,8 @@ namespace Business.Constans
         public static string CarUpdated = "Araba başarıyla güncellendi";
         public static string CarListed = "Arabalar başarıyla listelendi";
         public static string CustomerAdded = "Müşteri başarıyla eklendi";
-        public static string RentalAdded = "Başarıyla kiralandı";
-        public static string RentalError = "Araba kiralanamadı. Teslim Edilmemiş olabilir.";
+        public static string RentalAdded = "Arabanız Kiralanmıştır";
+        public static string RentalError = "Araba kiralanamadı. Araba daha geri dönmemiş.";
         public static string ImageLimitExceeded = "Bu araba için resim limiti aşılmıştır";
         public static string AuthorizationDenied = "Giriş Reddedildi";
         public static string UserRegistered = "Kullanıcı kaydoldu";
@@ -37,5 +37,7 @@ namespace Business.Constans
         public static string CustomerUpdated = "Müşteri güncellendi";
         public static string RentalDeleted = "Kiralama silindi";
         public static string RentalUpdated = "Kiralama güncellendi";
+        public static string CarNameAlreadyExists="Aynı isimle bir araba bulunmaktadır";
+        public static string CarNotReturned = "Araba hala kiralık durumda" ;
     }
 }
