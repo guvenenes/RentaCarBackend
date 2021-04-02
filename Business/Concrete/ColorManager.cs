@@ -1,5 +1,6 @@
 ﻿using Business.Abstract;
 using Business.Constans;
+using Core.Aspects.Autofac.Caching;
 using Core.Utilities.Results;
 using DataAccess.Abstract;
 using Entities.Concrete;
@@ -17,7 +18,7 @@ namespace Business.Concrete
         {
             _colorDal = colorDal;
         }
-
+        [CacheRemoveAspect("IColorService.Get")]
         public IResult Add(Color color)
         {
             _colorDal.Add(color);
