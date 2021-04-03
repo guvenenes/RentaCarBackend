@@ -36,7 +36,7 @@ namespace Business.Concrete
             return new SuccessDataResult<List<Color>>(_colorDal.GetAll());
         }
 
-        public IDataResult<List<Color>> GetCarsByColorId(int colorId)
+        public IDataResult<List<Color>> GetColorByColorId(int colorId)
         {
             return new SuccessDataResult<List<Color>>(_colorDal.GetAll(p => p.ColorId == colorId));
         }

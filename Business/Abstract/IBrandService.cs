@@ -12,7 +12,7 @@ namespace Business.Abstract
         IResult Delete(Brand brand);
         IResult Update(Brand brand);
         IDataResult<List<Brand>> GetAll();
-        IDataResult<List<Brand>> GetCarsByBrandId(int Id);
+        IDataResult<List<Brand>> GetBrandByBrandId(int Id);
 
     }
 }
