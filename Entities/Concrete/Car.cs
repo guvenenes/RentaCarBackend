@@ -14,5 +14,6 @@ namespace Entities.Concrete
         public int ColorId { get; set; }
         public string DailyPrice { get; set; }
         public string Description { get; set; }
+        public int? FindexPoint { get; set; }
     }
 }

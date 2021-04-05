@@ -5,14 +5,13 @@ using System.Text;
 
 namespace Entities.DTOs
 {
-    public class CustomerDetailDto : IDto
+    public class AuthDto : IDto
     {
-        public int CustomerId { get; set; }
         public int UserId { get; set; }
-        public string CompanyName { get; set; }
         public string FirstName { get; set; }
         public string LastName { get; set; }
+        public string Token { get; set; }
+        public DateTime Expiration { get; set; }
         public string Email { get; set; }
-        public int FindexPoint { get; set; }
     }
 }

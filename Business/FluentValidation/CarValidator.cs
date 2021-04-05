@@ -16,6 +16,7 @@ namespace Business.FluentValidation
             RuleFor(p => p.ModelYear).NotEmpty();
             RuleFor(p => p.Description).MinimumLength(2);
             RuleFor(p => p.DailyPrice).NotEmpty();
+            RuleFor(p => p.FindexPoint).GreaterThan(0).LessThan(1900);
         }
     }
 }

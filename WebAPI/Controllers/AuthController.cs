@@ -1,4 +1,5 @@
 ﻿using Business.Abstract;
+using Core.Utilities.Results;
 using Entities.DTOs;
 using Microsoft.AspNetCore.Mvc;
 using System;
@@ -29,12 +30,21 @@ namespace WebAPI.Controllers
             }
 
             var result = _authService.CreateAccessToken(userToLogin.Data);
-            if (result.Success)
+            if (!result.Success)
             {
-                return Ok(result.Data);
+                return BadRequest(result.Message); 
             }
-
-            return BadRequest(result.Message);
+            AuthDto authDto = new AuthDto
+            {
+                Email = userForLoginDto.Email,
+                UserId = userToLogin.Data.Id,
+                FirstName = userToLogin.Data.FirstName,
+                LastName = userToLogin.Data.LastName,
+                Token = result.Data.Token,
+                Expiration = result.Data.Expiration,
+            };
+            var result1 = new SuccessDataResult<AuthDto>(authDto, userToLogin.Message);
+            return Ok(result1);
         }
 
         [HttpPost("register")]
@@ -50,7 +60,7 @@ namespace WebAPI.Controllers
             var result = _authService.CreateAccessToken(registerResult.Data);
             if (result.Success)
             {
-                return Ok(result.Data);
+                return Ok(result);
             }
 
             return BadRequest(result.Message);
