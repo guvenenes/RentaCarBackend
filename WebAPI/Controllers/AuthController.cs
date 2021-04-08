@@ -36,7 +36,8 @@ namespace WebAPI.Controllers
             }
             AuthDto authDto = new AuthDto
             {
-                Email = userForLoginDto.Email,
+                
+                Email = userToLogin.Data.Email,
                 UserId = userToLogin.Data.Id,
                 FirstName = userToLogin.Data.FirstName,
                 LastName = userToLogin.Data.LastName,

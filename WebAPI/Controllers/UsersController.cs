@@ -1,5 +1,7 @@
 ﻿using Business.Abstract;
 using Core.Entities.Concrete;
+using Core.Utilities.Results;
+using Entities.DTOs;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
@@ -30,18 +32,30 @@ namespace WebAPI.Controllers
             return BadRequest(result);
         }
         [HttpGet("getbymail")]
-        public User GetBymail(string mail)
+        public ActionResult GetUserDetail(string mail)
         {
             var result = _userService.GetByMail(mail);
-            return result;
+            UserDetailDto userDetail = new UserDetailDto
+            {
+                FirstName = result.FirstName,
+            LastName = result.LastName,
+            UserId = result.Id,
             
-        }
-        [HttpGet("getclaims")]
-        public List<OperationClaim> GetClaims(User user)
-        {
-            var result = _userService.GetClaims(user);
-            return result;
+            };
+            var result1 = new SuccessDataResult<UserDetailDto>(userDetail);
+            return Ok(result1);
 
         }
+        [HttpPost("getclaims")]
+        public IActionResult GetClaims(User user)
+        {
+            var result = _userService.GetClaims(user);
+            if (result.Success)
+            {
+                return Ok(result);
+            }
+            return BadRequest(result);
+
+        }   
     }
 }
