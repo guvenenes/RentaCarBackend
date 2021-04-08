@@ -15,5 +15,6 @@ namespace Entities.Concrete
         public string DailyPrice { get; set; }
         public string Description { get; set; }
         public int? FindexPoint { get; set; }
+        public int GiveToPoint { get; set; }
     }
 }

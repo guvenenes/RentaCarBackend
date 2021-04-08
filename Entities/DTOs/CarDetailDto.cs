@@ -19,5 +19,6 @@ namespace Entities.DTOs
         public bool IsRentable { get; set; }
         public string ImagePath { get; set; }
         public int? FindexPoint { get; set; }
+        public int GiveToPoint { get; set; }
     }
 }

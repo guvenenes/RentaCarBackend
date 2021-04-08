@@ -37,6 +37,7 @@ namespace DataAccess.Concrete.EntityFramework
                                                           DailyPrice = c.DailyPrice.ToString(),
                                                           Description = c.Description,
                                                           FindexPoint = c.FindexPoint,
+                                                          GiveToPoint = c.GiveToPoint,
                                                           IsRentable = !context.Rentals.Any(r => r.CarId == c.CarId && r.ReturnDate > DateTime.Now),
                                                           ImagePath = (from i in context.Images where i.CarId == c.CarId select i.ImagePath).FirstOrDefault()
                                                       };
