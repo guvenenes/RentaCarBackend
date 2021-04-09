@@ -8,6 +8,7 @@ using Entities.Concrete;
 using Microsoft.AspNetCore.Http;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 
 namespace Business.Concrete
@@ -50,7 +51,20 @@ namespace Business.Concrete
 
         public IDataResult<List<Image>> GetImagesByCarId(int carId)
         {
-            return new SuccessDataResult<List<Image>>(_imageDal.GetAll(p => p.CarId == carId));
+            var result = _imageDal.GetAll(c => c.CarId == carId);
+            if (result.Any()) 
+            { 
+                return new SuccessDataResult<List<Image>>(result); 
+            }
+            else
+            {
+                return new SuccessDataResult<List<Image>>(new List<Image>
+            {
+                new Image{  CarId = carId,  ImagePath = "\\Images\\default.jpg", Date = DateTime.Now }
+            });
+            }
+            
+            
         }
 
         public IResult Update(IFormFile file, Image image)
