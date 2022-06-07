@@ -29,10 +29,10 @@ namespace WebAPI.Controllers
             }
             return BadRequest(result);
         }
-        [HttpGet("getbyid")]
-        public IActionResult GetByBrandId(int id)
+        [HttpGet("getbybrandid")]
+        public IActionResult GetByBrandId(int brandId)
         {
-            var result = _carService.GetCarsByBrandId(id);
+            var result = _carService.GetCarsByBrandId(brandId);
             if (result.Success)
             {
                 return Ok(result);
@@ -41,9 +41,9 @@ namespace WebAPI.Controllers
             return BadRequest(result);
         }
         [HttpGet("getbycolorid")]
-        public IActionResult GetByColorId(int id)
+        public IActionResult GetByColorId(int colorId)
         {
-            var result = _carService.GetCarsByColorId(id);
+            var result = _carService.GetCarsByColorId(colorId);
             if (result.Success)
             {
                 return Ok(result);
@@ -101,9 +101,9 @@ namespace WebAPI.Controllers
             return BadRequest(result);
         }
         [HttpPost("add")]
-        public IActionResult Add(Car product)
+        public IActionResult Add(Car car)
         {
-            var result = _carService.Add(product);
+            var result = _carService.Add(car);
             if (result.Success)
             {
                 return Ok(result);
@@ -111,9 +111,9 @@ namespace WebAPI.Controllers
             return BadRequest(result);
         }
         [HttpPost("delete")]
-        public IActionResult Delete(Car product)
+        public IActionResult Delete(Car car)
         {
-            var result = _carService.Delete(product);
+            var result = _carService.Delete(car);
             if (result.Success)
             {
                 return Ok(result);
@@ -121,9 +121,9 @@ namespace WebAPI.Controllers
             return BadRequest(result);
         }
         [HttpPost("update")]
-        public IActionResult Update(Car product)
+        public IActionResult Update(Car car)
         {
-            var result = _carService.Update(product);
+            var result = _carService.Update(car);
             if (result.Success)
             {
                 return Ok(result);

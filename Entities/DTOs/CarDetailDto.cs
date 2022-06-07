@@ -20,5 +20,7 @@ namespace Entities.DTOs
         public string ImagePath { get; set; }
         public int? FindexPoint { get; set; }
         public int GiveToPoint { get; set; }
+        //public DateTime RentDate { get; set; }
+        //public DateTime ReturnDate { get; set; }
     }
 }

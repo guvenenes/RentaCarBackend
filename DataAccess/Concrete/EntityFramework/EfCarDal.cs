@@ -24,6 +24,8 @@ namespace DataAccess.Concrete.EntityFramework
                                                       on c.BrandId equals b.BrandId
                                                       join cl in context.Colors
                                                       on c.ColorId equals cl.ColorId
+                                                      //join rd in context.Rentals
+                                                      //on c.CarId equals rd.CarId
 
                                                       select new CarDetailDto
                                                       {
@@ -40,6 +42,8 @@ namespace DataAccess.Concrete.EntityFramework
                                                           GiveToPoint = c.GiveToPoint,
                                                           IsRentable = !context.Rentals.Any(r => r.CarId == c.CarId && r.ReturnDate > DateTime.Now),
                                                           ImagePath = (from i in context.Images where i.CarId == c.CarId select i.ImagePath).FirstOrDefault(),
+                                                          //RentDate = rd.RentDate,
+                                                          //ReturnDate = rd.ReturnDate
                                                       };
 
                 return carDetails.ToList();
